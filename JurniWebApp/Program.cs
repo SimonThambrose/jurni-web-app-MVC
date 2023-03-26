@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = builder.Configuration.GetConnectionString("JurniWebAppDb");
 builder.Services.AddDbContext<JurniWebAppDbContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddControllersWithViews();
