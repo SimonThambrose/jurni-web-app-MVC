@@ -989,3 +989,4 @@ FodyWeavers.xsd
 .history/
 
 # Manual additions
+JurniWebApp/appsettings.json
