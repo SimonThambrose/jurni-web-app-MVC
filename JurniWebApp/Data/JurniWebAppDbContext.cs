@@ -54,6 +54,18 @@ public class JurniWebAppDbContext : DbContext {
                 Description = "Unlimited matches per day, with additional features and support. Response within 72 hours."
             });
         });
+        
+        modelBuilder.Entity<Blog>(blog => {
+            blog.Property(b => b.Title).IsRequired().HasMaxLength(90);
+            blog.Property(b => b.Description).HasMaxLength(500);
+        });
+
+        modelBuilder.Entity<ContactRequest>(ContactRequest => {
+            ContactRequest.Property(cr => cr.FirstName).IsRequired().HasMaxLength(45);
+            ContactRequest.Property(cr => cr.LastName).IsRequired().HasMaxLength(45);
+            ContactRequest.Property(cr => cr.Email).IsRequired().HasMaxLength(90);
+            ContactRequest.Property(cr => cr.Message).IsRequired().HasMaxLength(500);
+        });
 
         modelBuilder.Entity<User>().HasMany(u => u.UserPlans).WithOne(up => up.User).HasForeignKey(up => up.UserId);
         modelBuilder.Entity<Plan>().HasMany(p => p.PlanUsers).WithOne(up => up.Plan).HasForeignKey(up => up.PlanId);
