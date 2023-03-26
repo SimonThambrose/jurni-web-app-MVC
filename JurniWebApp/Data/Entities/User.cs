@@ -14,7 +14,8 @@ namespace JurniWebApp.Data.Entities;
  * - IsAdmin: A boolean value indicating whether the user is an administrator.
  * - CreatedAt: The date and time when the user was created.
  * - UpdatedAt: The date and time when the user was last updated.
- * - UserPlans: The plans subscribed by the user.
+ * - PlanId: The unique identifier of the plan of the user.
+ * - Plan: The plan of the user.
  * - Blogs: The blogs created by the user.
  */
 public class User {
@@ -43,6 +44,7 @@ public class User {
     public bool IsAdmin { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
-    public ICollection<UserPlan> UserPlans { get; set; }
+    public int PlanId { get; set; }
+    public Plan Plan { get; set; }
     public ICollection<Blog> Blogs { get; set; }
 }

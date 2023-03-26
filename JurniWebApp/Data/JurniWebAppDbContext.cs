@@ -6,7 +6,8 @@ namespace JurniWebApp.Data;
 public class JurniWebAppDbContext : DbContext {
     public DbSet<User> Users { get; set; }
     public DbSet<Plan> Plans { get; set; }
-    public DbSet<UserPlan> UserPlans { get; set; }
+    public DbSet<Blog> Blogs { get; set; }
+    public DbSet<ContactRequest> ContactRequests { get; set; }
 
     /**
      * Constructor.
@@ -66,10 +67,8 @@ public class JurniWebAppDbContext : DbContext {
             ContactRequest.Property(cr => cr.Email).IsRequired().HasMaxLength(90);
             ContactRequest.Property(cr => cr.Message).IsRequired().HasMaxLength(500);
         });
-
-        modelBuilder.Entity<User>().HasMany(u => u.UserPlans).WithOne(up => up.User).HasForeignKey(up => up.UserId);
-        modelBuilder.Entity<Plan>().HasMany(p => p.PlanUsers).WithOne(up => up.Plan).HasForeignKey(up => up.PlanId);
-
-        modelBuilder.Entity<UserPlan>().HasKey(up => new { up.UserId, up.PlanId });
+        
+        modelBuilder.Entity<Plan>().HasMany(p => p.Users).WithOne(u => u.Plan).HasForeignKey(u => u.PlanId);
+        modelBuilder.Entity<User>().HasMany(u => u.Blogs).WithOne(b => b.Author).HasForeignKey(b => b.AuthorId);
     }
 }

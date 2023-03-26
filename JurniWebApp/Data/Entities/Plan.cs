@@ -9,7 +9,7 @@ namespace JurniWebApp.Data.Entities;
  * - Name: The name of the plan.
  * - Price: The price of the plan.
  * - Description: The description of the plan.
- * - PlanUsers: The users subscribed to the plan.
+ * - Users: The users subscribed to the plan.
  */
 public class Plan {
     [Key]
@@ -17,5 +17,5 @@ public class Plan {
     public string Name { get; set; }
     public int Price { get; set; }
     public string Description { get; set; }
-    public ICollection<UserPlan> PlanUsers { get; set; }
+    public ICollection<User> Users { get; set; }
 }
