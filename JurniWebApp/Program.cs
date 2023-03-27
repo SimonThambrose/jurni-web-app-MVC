@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("JurniWebAppDb");
-builder.Services.AddDbContext<JurniWebAppDbContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<JurniWebAppDbContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 builder.Services.AddControllersWithViews();
 

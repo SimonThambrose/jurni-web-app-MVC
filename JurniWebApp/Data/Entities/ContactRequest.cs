@@ -1,5 +1,5 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JurniWebApp.Data.Entities;
 
@@ -22,23 +22,29 @@ public class ContactRequest {
 
     [Required(ErrorMessage = EntityValidations.StringRequiredMessage)]
     [StringLength(45, MinimumLength = 1, ErrorMessage = EntityValidations.StringBetweenLengthMessage)]
-    public int FirstName { get; set; }
+    public string FirstName { get; set; }
 
     [Required(ErrorMessage = EntityValidations.StringRequiredMessage)]
     [StringLength(45, MinimumLength = 1, ErrorMessage = EntityValidations.StringBetweenLengthMessage)]
-    public int LastName { get; set; }
+    public string LastName { get; set; }
 
     [Required(ErrorMessage = EntityValidations.StringRequiredMessage)]
     [StringLength(90, MinimumLength = 5, ErrorMessage = EntityValidations.StringBetweenLengthMessage)]
     [EmailAddress(ErrorMessage = EntityValidations.EmailFormatMessage)]
     [DataType(DataType.EmailAddress)]
-    public int Email { get; set; }
+    public string Email { get; set; }
 
     [Required(ErrorMessage = EntityValidations.StringRequiredMessage)]
     [StringLength(500, MinimumLength = 10, ErrorMessage = EntityValidations.StringBetweenLengthMessage)]
-    public int Message { get; set; }
+    public string Message { get; set; }
     public bool IsEnterprisePlan { get; set; }
+    
+    [Column(TypeName = "varchar(8)")]
     public string Status { get; set; }
-    public DateTime CreatedOn { get; set; }
-    public DateTime UpdatedOn { get; set; }
+    
+    [Column(TypeName = "datetime")]
+    public DateTime? CreatedOn { get; set; }
+    
+    [Column(TypeName = "datetime")]
+    public DateTime? UpdatedOn { get; set; }
 }

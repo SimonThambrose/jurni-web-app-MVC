@@ -1,4 +1,4 @@
-﻿namespace JurniWebApp.Data; 
+﻿namespace JurniWebApp.Data;
 
 /**
  * EntityValidations. Validation messages for entities.

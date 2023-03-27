@@ -1,5 +1,5 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JurniWebApp.Data.Entities; 
 
@@ -22,10 +22,15 @@ public class Blog {
     [StringLength(90, MinimumLength = 1, ErrorMessage = EntityValidations.StringBetweenLengthMessage)]
     public string Title { get; set; }
     
-    [MaxLength(500, ErrorMessage = EntityValidations.StringMaxLengthMessage)]
+    [Required(ErrorMessage = EntityValidations.StringRequiredMessage)]
+    [StringLength(500, MinimumLength = 10, ErrorMessage = EntityValidations.StringBetweenLengthMessage)]
     public string Description { get; set; }
     public int AuthorId { get; set; }
     public User Author { get; set; }
-    public DateTime CreatedAt { get; set; }
-    public DateTime UpdatedAt { get; set; }
+    
+    [Column(TypeName = "datetime")]
+    public DateTime? CreatedAt { get; set; }
+    
+    [Column(TypeName = "datetime")]
+    public DateTime? UpdatedAt { get; set; }
 }

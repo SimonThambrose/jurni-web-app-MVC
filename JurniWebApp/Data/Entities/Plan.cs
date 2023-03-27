@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JurniWebApp.Data.Entities;
 
@@ -14,8 +15,12 @@ namespace JurniWebApp.Data.Entities;
 public class Plan {
     [Key]
     public int Id { get; set; }
+    
+    [Column(TypeName = "varchar(45)")]
     public string Name { get; set; }
-    public int Price { get; set; }
-    public string Description { get; set; }
+    public int? Price { get; set; }
+    
+    [Column(TypeName = "varchar(500)")]
+    public string? Description { get; set; }
     public ICollection<User> Users { get; set; }
 }
