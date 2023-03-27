@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JurniWebApp.Data.Entities;
@@ -43,6 +44,8 @@ public class User {
     public string Password { get; set; }
     public int? PlanId { get; set; }
     public Plan? Plan { get; set; }
+    
+    [DefaultValue(false)]
     public bool IsAdmin { get; set; }
     
     [Column(TypeName = "datetime")]

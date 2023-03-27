@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JurniWebApp.Data.Entities;
@@ -37,9 +38,12 @@ public class ContactRequest {
     [Required(ErrorMessage = EntityValidations.StringRequiredMessage)]
     [StringLength(500, MinimumLength = 10, ErrorMessage = EntityValidations.StringBetweenLengthMessage)]
     public string Message { get; set; }
+    
+    [DefaultValue(false)]
     public bool IsEnterprisePlan { get; set; }
     
     [Column(TypeName = "varchar(8)")]
+    [DefaultValue("Pending")]
     public string Status { get; set; }
     
     [Column(TypeName = "datetime")]

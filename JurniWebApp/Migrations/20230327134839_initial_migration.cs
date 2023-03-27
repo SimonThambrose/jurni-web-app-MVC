@@ -98,6 +98,7 @@ namespace JurniWebApp.Migrations
                     Description = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     AuthorId = table.Column<int>(type: "int", nullable: false),
+                    Likes = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     CreatedAt = table.Column<DateTime>(type: "datetime", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
