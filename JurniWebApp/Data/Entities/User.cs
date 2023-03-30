@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace JurniWebApp.Data.Entities;
 
@@ -20,6 +22,8 @@ namespace JurniWebApp.Data.Entities;
  * - Blogs: The blogs created by the user.
  */
 public class User {
+    private string _password;
+    
     [Key]
     public int Id { get; set; }
 
@@ -40,8 +44,11 @@ public class User {
     [Required(ErrorMessage = EntityValidations.StringRequiredMessage)]
     [StringLength(90, MinimumLength = 8, ErrorMessage = EntityValidations.StringBetweenLengthMessage)]
     [DataType(DataType.Password)]
-    
-    public string Password { get; set; }
+    public string Password {
+        get => _password;
+        set => _password = HashPassword(value);
+    }
+
     public int? PlanId { get; set; }
     public Plan? Plan { get; set; }
     public bool IsAdmin { get; set; }
@@ -52,4 +59,18 @@ public class User {
     [Column(TypeName = "datetime")]
     public DateTime? UpdatedAt { get; set; }
     public ICollection<Blog> Blogs { get; set; }
+
+    private string HashPassword(string password) {
+        string salt = DateTime.Now.Day.ToString();
+        byte[] passwordBytes = ASCIIEncoding.ASCII.GetBytes(salt + password);
+        byte[] hashedPassword = new MD5CryptoServiceProvider().ComputeHash(passwordBytes);
+        
+        StringBuilder sOutput = new StringBuilder(hashedPassword.Length);
+        for (int i=0;i < hashedPassword.Length; i++)
+        {
+            sOutput.Append(hashedPassword[i].ToString("X2"));
+        }
+
+        return sOutput.ToString();
+    }
 }

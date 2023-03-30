@@ -33,6 +33,11 @@ public class JurniWebAppDbContext : DbContext {
             user.Property(u => u.LastName).IsRequired().HasMaxLength(45);
             user.Property(u => u.Email).IsRequired().HasMaxLength(90);
             user.Property(u => u.Password).IsRequired().HasMaxLength(90);
+
+            user.HasData(new User() {
+                Id = 1, FirstName = "John", LastName = "Johnson", Email = "johnj@jurni.nl",
+                Password = "PASSWORD", IsAdmin = true, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now
+            });
         });
 
         modelBuilder.Entity<Plan>(plan => {

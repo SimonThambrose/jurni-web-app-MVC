@@ -29,12 +29,15 @@ namespace JurniWebApp.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("varchar(500)");
+
+                    b.Property<int>("Likes")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -42,7 +45,7 @@ namespace JurniWebApp.Migrations
                         .HasColumnType("varchar(90)");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.HasKey("Id");
 
@@ -58,7 +61,7 @@ namespace JurniWebApp.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("CreatedOn")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -88,7 +91,7 @@ namespace JurniWebApp.Migrations
                         .HasColumnType("varchar(8)");
 
                     b.Property<DateTime?>("UpdatedOn")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.HasKey("Id");
 
@@ -154,7 +157,7 @@ namespace JurniWebApp.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -183,13 +186,26 @@ namespace JurniWebApp.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PlanId");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2023, 3, 30, 13, 7, 59, 711, DateTimeKind.Local).AddTicks(2942),
+                            Email = "johnj@jurni.nl",
+                            FirstName = "John",
+                            IsAdmin = true,
+                            LastName = "Johnson",
+                            Password = "8F670A39A63922B54541CBFFF2C6ECBF",
+                            UpdatedAt = new DateTime(2023, 3, 30, 13, 7, 59, 711, DateTimeKind.Local).AddTicks(2948)
+                        });
                 });
 
             modelBuilder.Entity("JurniWebApp.Data.Entities.Blog", b =>

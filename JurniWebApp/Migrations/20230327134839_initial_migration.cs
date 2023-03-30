@@ -125,6 +125,11 @@ namespace JurniWebApp.Migrations
                     { 4, "Unlimited matches per day, with additional features and support. Response within 72 hours.", "Enterprise", null }
                 });
 
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "CreatedAt", "Email", "FirstName", "IsAdmin", "LastName", "Password", "PlanId", "UpdatedAt" },
+                values: new object[] { 1, new DateTime(2023, 3, 30, 12, 35, 35, 863, DateTimeKind.Local).AddTicks(2412), "johnj@jurni.nl", "John", true, "Johnson", "8F670A39A63922B54541CBFFF2C6ECBF", null, new DateTime(2023, 3, 30, 12, 35, 35, 863, DateTimeKind.Local).AddTicks(2419) });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Blogs_AuthorId",
                 table: "Blogs",
