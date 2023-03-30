@@ -44,8 +44,6 @@ public class User {
     public string Password { get; set; }
     public int? PlanId { get; set; }
     public Plan? Plan { get; set; }
-    
-    [DefaultValue(false)]
     public bool IsAdmin { get; set; }
     
     [Column(TypeName = "datetime")]

@@ -28,8 +28,6 @@ public class Blog {
     public string Description { get; set; }
     public int AuthorId { get; set; }
     public User Author { get; set; }
-    
-    [DefaultValue(0)]
     public int Likes { get; set; }
     
     [Column(TypeName = "datetime")]
