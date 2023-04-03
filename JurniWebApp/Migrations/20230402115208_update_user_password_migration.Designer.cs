@@ -3,6 +3,7 @@ using System;
 using JurniWebApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JurniWebApp.Migrations
 {
     [DbContext(typeof(JurniWebAppDbContext))]
-    partial class JurniWebAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230402115208_update_user_password_migration")]
+    partial class update_user_password_migration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

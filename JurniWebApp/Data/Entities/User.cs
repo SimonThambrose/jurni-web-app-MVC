@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace JurniWebApp.Data.Entities;
 
@@ -11,41 +13,31 @@ namespace JurniWebApp.Data.Entities;
  * - FirstName: The first name of the user.
  * - LastName: The last name of the user.
  * - Email: The email of the user.
- * - Password: The password of the user.
+ * - PasswordSalt: The salt of the password of the user.
+ * - PasswordHash: The hash of the password of the user.
+ * - PlanId: The unique identifier of the plan of the user.
+ * - Plan: The plan of the user.
  * - IsAdmin: A boolean value indicating whether the user is an administrator.
  * - CreatedAt: The date and time when the user was created.
  * - UpdatedAt: The date and time when the user was last updated.
- * - PlanId: The unique identifier of the plan of the user.
- * - Plan: The plan of the user.
  * - Blogs: The blogs created by the user.
  */
 public class User {
     [Key]
     public int Id { get; set; }
 
-    [Required(ErrorMessage = EntityValidations.StringRequiredMessage)]
-    [StringLength(45, MinimumLength = 1, ErrorMessage = EntityValidations.StringBetweenLengthMessage)]
+    [StringLength(45, MinimumLength = 1)]
     public string FirstName { get; set; }
 
-    [Required(ErrorMessage = EntityValidations.StringRequiredMessage)]
     [StringLength(45, MinimumLength = 1, ErrorMessage = EntityValidations.StringBetweenLengthMessage)]
     public string LastName { get; set; }
 
-    [Required(ErrorMessage = EntityValidations.StringRequiredMessage)]
-    [StringLength(90, MinimumLength = 5, ErrorMessage = EntityValidations.StringBetweenLengthMessage)]
-    [EmailAddress(ErrorMessage = EntityValidations.EmailFormatMessage)]
-    [DataType(DataType.EmailAddress)]
+    [StringLength(90, MinimumLength = 5)]
     public string Email { get; set; }
-    
-    [Required(ErrorMessage = EntityValidations.StringRequiredMessage)]
-    [StringLength(90, MinimumLength = 8, ErrorMessage = EntityValidations.StringBetweenLengthMessage)]
-    [DataType(DataType.Password)]
-    
-    public string Password { get; set; }
+    public byte[] PasswordSalt { get; set; }
+    public byte[] PasswordHash { get; set; }
     public int? PlanId { get; set; }
     public Plan? Plan { get; set; }
-    
-    [DefaultValue(false)]
     public bool IsAdmin { get; set; }
     
     [Column(TypeName = "datetime")]

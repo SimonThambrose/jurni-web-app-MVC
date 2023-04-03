@@ -1,4 +1,6 @@
-﻿using JurniWebApp.Data.Entities;
+﻿using System.Security.Cryptography;
+using System.Text;
+using JurniWebApp.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace JurniWebApp.Data;
@@ -32,7 +34,14 @@ public class JurniWebAppDbContext : DbContext {
             user.Property(u => u.FirstName).IsRequired().HasMaxLength(45);
             user.Property(u => u.LastName).IsRequired().HasMaxLength(45);
             user.Property(u => u.Email).IsRequired().HasMaxLength(90);
-            user.Property(u => u.Password).IsRequired().HasMaxLength(90);
+
+            using (var hmac = new HMACSHA512()) {
+                user.HasData(new User() {
+                    Id = 1, FirstName = "John", LastName = "Johnson", Email = "EMAIL", PasswordSalt = hmac.Key,
+                    PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("PASSWORD")), IsAdmin = true,
+                    CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now
+                });
+            }
         });
 
         modelBuilder.Entity<Plan>(plan => {
