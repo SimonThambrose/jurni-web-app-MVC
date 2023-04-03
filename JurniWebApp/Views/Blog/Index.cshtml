@@ -28,7 +28,7 @@
     </tr>
     </thead>
     <tbody>
-    @if (Model.Any()) {
+    @if (!Model.Any()) {
         <tr>
             <td colspan="7">No blogs found. Try <a asp-action="Create">creating a new one</a>.</td>
         </tr>
@@ -36,16 +36,16 @@
         @foreach (var item in Model) {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Title)
+                    @item.Title
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Description)
+                    @item.Description
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Likes)
+                    @item.Likes
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CreatedAt)
+                    @item.CreatedAt
                 </td>
                 <td>
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

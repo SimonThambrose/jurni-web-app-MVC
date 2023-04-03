@@ -20,7 +20,9 @@ namespace JurniWebApp.Controllers {
 
         [AllowAnonymous]
         public ActionResult Details(int id) {
-            return View();
+            Blog blog = _context.Blogs.Find(id);
+            blog.Author = _context.Users.Find(blog.AuthorId);
+            return View(blog);
         }
 
         [AllowAnonymous]

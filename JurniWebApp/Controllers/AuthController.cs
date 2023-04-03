@@ -13,10 +13,9 @@ namespace JurniWebApp.Controllers {
     [Route("api/[controller]"), ApiController]
     public class AuthController : ControllerBase {
         private readonly JurniWebAppDbContext _context;
+        public const string TokenKey = "SECRETKEY";
         
-        public static string TokenKey = "SECRETKEY";
-
-        public AuthController(JurniWebAppDbContext context, IConfiguration configuration) {
+        public AuthController(JurniWebAppDbContext context) {
             _context = context;
         }
 
@@ -46,14 +45,14 @@ namespace JurniWebApp.Controllers {
             try {
                 User user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
                 if (!VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt)) {
-                    return Unauthorized("Invalid email or password");
+                    return Unauthorized("Invalid email or password.");
                 }
                 
                 string token = CreateToken(user);
 
                 return Ok(token);
             } catch (NullReferenceException) {
-                return Unauthorized("Invalid email or password");
+                return Unauthorized("Invalid email or password.");
             }
         }
 
